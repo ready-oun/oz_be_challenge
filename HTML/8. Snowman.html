@@ -5,135 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>귀여운 눈사람</title>
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #87CEEB;
-            margin: 0;
-        }
+        body{background: skyblue;height:100%;width:100%;overflow:hidden;}
+        .snowman{width:500px;height:500px;margin:0 auto;}
+        .hat{}
+        .hat > .hat_top{width:50px;height:60px;margin:0 225px;background: black;}
+        .hat > .hat_bottom{width:80px;height:20px;margin:0 210px;background: black;z-index:2;} 
+        .head{width:100px;height:100px;margin:0 auto;border-radius: 50%; background:white;margin-top:-10px; z-index:1; position:relative;}
+        .head > .eye{}
+        .head > .eye > .left_eye{width:10px;height:10px;margin:0;border-radius:50%;background:black;position:absolute;top:30px;left:30px;}
+        .head > .eye > .right_eye{width:10px;height:10px;margin:0;border-radius:50%;background:black;position:absolute;top:30px;right:30px;}
+        .head > .mouth{width:40px;height:10px;margin:0;background:orange;position:absolute;top:70px;left:30px;}
+        .body{}
+        .body > .arm{}
+        .body > .arm > .left_arm{}
+        .body > .arm > .right_arm{}
+        .body > .button > .button1{}
+        .body > .button > .button2{}
+        .body > .button > .button3{}
+        .foot{}
 
-        .snowman {
-            position: relative;
-        }
-
-        .body {
-            width: 120px;
-            height: 120px;
-            background-color: #fff;
-            border-radius: 60px;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .head {
-            width: 80px;
-            height: 80px;
-            background-color: #fff;
-            border-radius: 50%;
-            position: absolute;
-            top: -40px;
-            left: 20px;
-        }
-
-        .eye {
-            width: 12px;
-            height: 12px;
-            background-color: #000;
-            border-radius: 50%;
-            position: absolute;
-            top: 20px;
-            left: 30px;
-        }
-
-        .mouth {
-            width: 40px;
-            height: 20px;
-            background-color: #000;
-            border-radius: 0 0 30px 30px;
-            position: absolute;
-            top: 30px;
-            left: 20px;
-        }
-
-        .nose {
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 20px solid #FFA500;
-            position: absolute;
-            top: 20px;
-            left: 35px;
-        }
-
-        .arm {
-            width: 10px;
-            height: 50px;
-            background-color: #8B4513;
-            position: absolute;
-            top: 20px;
-            left: -10px;
-            transform: rotate(-30deg);
-        }
-
-        .hat {
-            width: 80px;
-            height: 20px;
-            background-color: #000;
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            z-index: 1;
-        }
-
-        .hat-top {
-            width: 60px;
-            height: 60px;
-            background-color: #000;
-            border-radius: 50%;
-            position: absolute;
-            top: -30px;
-            left: 20px;
-            z-index: 0;
-        }
-
-        .scarf {
-            width: 60px;
-            height: 10px;
-            background-color: #FF0000;
-            position: absolute;
-            top: 80px;
-            left: 30px;
-        }
-
-        .button {
-            width: 15px;
-            height: 15px;
-            background-color: #000;
-            border-radius: 50%;
-            position: absolute;
-            top: 60px;
-            left: 50px;
-        }
     </style>
 </head>
 <body>
     <div class="snowman">
         <div class="hat">
-            <div class="hat-top"></div>
+            <div class="hat_top"></div>
+            <div class="hat_bottom"></div>
         </div>
-        <div class="scarf"></div>
-        <div class="body">
-            <div class="eye"></div>
-            <div class="eye" style="left: 60px;"></div>
+        <div class="head">
+            <div class="eye">
+                <div class="left_eye"></div>
+                <div class="right_eye"></div>
+            </div>
             <div class="mouth"></div>
         </div>
-        <div class="head"></div>
-        <div class="arm"></div>
-        <div class="nose"></div>
-        <div class="button"></div>
+        <div class="body">
+            <div class="arm">
+                <div class="left_arm"></div>
+                <div class="right_arm"></div>
+            </div>
+            <div class="button">
+                <div class="button1"></div>
+                <div class="button2"></div>
+                <div class="button3"></div>
+            </div>
+        </div>
+        <div class="foot"></div>
     </div>
 </body>
 </html>
+
+
