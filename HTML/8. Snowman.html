@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>귀여운 눈사람</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #87CEEB; /* 하늘색 배경 */
+        }
+
+        .snowman {
+            position: relative;
+            text-align: center;
+        }
+
+        .body {
+            width: 120px;
+            height: 200px;
+            background-color: #fff;
+            border-radius: 60px 60px 50px 50px;
+            margin: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .head {
+            width: 80px;
+            height: 80px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin: -10px auto 0;
+            position: relative;
+            z-index: 3;
+        }
+
+        .eye {
+            width: 12px;
+            height: 12px;
+            background-color: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 25px;
+            left: 30px;
+        }
+
+        .mouth {
+            width: 40px;
+            height: 20px;
+            background-color: #000;
+            border-radius: 0 0 30px 30px;
+            position: absolute;
+            top: 35px;
+            left: 20px;
+        }
+
+        .nose {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 20px solid #FFA500; /* 주황색 삼각형 코 */
+            position: absolute;
+            top: 20px;
+            left: 35px;
+        }
+
+        .arm {
+            width: 10px;
+            height: 70px;
+            background-color: #8B4513; /* 갈색 손 */
+            position: absolute;
+            top: 60px;
+            left: -10px;
+            transform: rotate(-30deg);
+        }
+
+        .hat {
+            width: 80px;
+            height: 40px;
+            background-color: #000;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            z-index: 1;
+        }
+
+        .hat-top {
+            width: 60px;
+            height: 60px;
+            background-color: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            z-index: 0;
+        }
+
+        .scarf {
+            width: 60px;
+            height: 10px;
+            background-color: #FF0000; /* 빨간색 스카프 */
+            position: absolute;
+            top: 110px;
+            left: 30px;
+        }
+
+        .button {
+            width: 15px;
+            height: 15px;
+            background-color: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 75px;
+            left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="snowman">
+        <div class="hat">
+            <div class="hat-top"></div>
+        </div>
+        <div class="scarf"></div>
+        <div class="body">
+            <div class="eye"></div>
+            <div class="eye" style="left: 60px;"></div>
+            <div class="mouth"></div>
+            <div class="nose"></div>
+            <div class="button"></div>
+        </div>
+        <div class="head"></div>
+        <div class="arm"></div>
+    </div>
+</body>
+</html>
