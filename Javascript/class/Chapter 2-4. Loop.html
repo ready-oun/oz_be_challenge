@@ -18,14 +18,16 @@
       // while문을 이용하여 1부터 50까지의 숫자 중에서 홀수인 경우에만 현재 반복을 종료하고 다음 반복을 이어가며, 홀수의 총합을 구하는 코드를 작성해보세요.
 
       let sum = 0;
-
-      while (i = 1; i <= 50){
-          if (i % 2 !== 0) {
-              sum += i;
-              console.log(i, sum);
-          }
+      let i = 1;
+      while (i <= 50) {
+        if (i % 2 !== 0) {
+          sum += i;
+          console.log(i, sum);
+        } else {
+          i++;
+        }
       }
-      console.log(sum)
+      console.log(sum);
     </script>
   </body>
 </html>
