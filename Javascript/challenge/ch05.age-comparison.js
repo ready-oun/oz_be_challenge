@@ -21,9 +21,12 @@ function question(age1, age2) {
   // 여기에서 코드 작성해주세요!
 
   let result;
-
-  if (age1 == age2) {
-    result = "너 내 동료가 돼라!";
+  if (age1 >= 1 && age1 <= 100 && age2 >= 1 && age2 <= 100) {
+    if (age1 == age2) {
+      result = "너 내 동료가 돼라!";
+    } else {
+      result = "너 내 도도도도독...";
+    }
   } else {
     result = "너 내 도도도도독...";
   }
@@ -40,7 +43,7 @@ Test(
     [32, 32],
     [24, 24],
     [19, 17],
-    [20, 21],
+    [20, 18],
   ],
   [
     "너 내 동료가 돼라!",

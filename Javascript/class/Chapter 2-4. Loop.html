@@ -22,10 +22,11 @@
       while (i <= 50) {
         if (i % 2 !== 0) {
           sum += i;
-          console.log(i, sum);
-        } else {
-          i++;
+          console.log(i);
         }
+        i++;
+        // 왜 무한루프 된 거지? ? ?? ? ?
+        // i++;를 if 밖으로 안 빼고, else 안에서 돌려서 무한루프되는거였따.....
       }
       console.log(sum);
     </script>

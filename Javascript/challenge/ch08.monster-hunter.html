@@ -34,12 +34,6 @@
           attackCount += 1;
           monsterHP -= attackDamage;
 
-          // 0보다 작아지면 0으로 대입
-
-          if (monsterHP < 0) {
-            monsterHP = 0;
-          }
-
           const p = document.createElement("p");
           p.textContent = `몬스터를 ${attackCount}회 공격했다!`;
           container.append(p);
@@ -47,7 +41,11 @@
           const strong = document.createElement("strong");
           strong.textContent = `몬스터의 남은 HP는 ${monsterHP}입니다!`;
           container.append(strong);
+          // 0보다 작아지면 0으로 대입
 
+          if (monsterHP < 0) {
+            strong.textContent = `몬스터의 남은 HP는 0입니다.`;
+          }
           // HP === 0
           if (monsterHP === 0) {
             const h2 = document.createElement("h2");
