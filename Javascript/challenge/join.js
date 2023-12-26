@@ -33,5 +33,11 @@ form.addEventListener("submit", function (event) {
 
   // 가입 잘 됨 ! 환여 ㅇ!
   document.body.innerHTML = ""; // 도큐멘트를 불러와서 body html 코드를 불러와서 아예 새 HTML 코드를 넣어버리겠다 "" == 아무것도없다.
-  document.write(`<p>${userId}님, 환영합니다!</p>`);
+  document.write(
+    `<p>${userId}님, 환영합니다!</p> <br> 회원 가입 시 입력하신 내역은 다음과 같습니다. <br>
+    - 아이디 : ${userId} <br>
+    - 이름 : ${userName} <br>
+    - 전화번호 : ${userPhone} <br>
+    - 원하는 직무 : ${userPosition}`
+  );
 });
