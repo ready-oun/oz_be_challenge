@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dark mode</title>
+  </head>
+  <body>
+    <div>
+      <h1>A-yo</h1>
+      <button id="light" onclick="LightMode()">Light Mode</button>
+      <button id="dark" onclick="DarkMode()">Dark Mode</button>
+    </div>
+    <script>
+      // USE DOM METHOD TO AMD BACKGROUND-COLOR TO BLACK (DARK MODE ON-OFF) *with `getelementbyID`
+      /* set white background color first, and make it dark when you click the button.
+      Look up `Inline Javascript On-click`; make the dffect appear only when the corresponding button is pressed.
+      How to change the background of a body's style in JS ; simplified by finding a stylesheet specifier in the stylesheet that changes the element.
+      */
+
+      const body = document.body;
+
+      function LightMode() {
+        body.style.backgroundColor = "white";
+        body.style.color = "black";
+      }
+
+      function DarkMode() {
+        body.style.backgroundColor = "black";
+        body.style.color = "white";
+      }
+    </script>
+  </body>
+</html>
