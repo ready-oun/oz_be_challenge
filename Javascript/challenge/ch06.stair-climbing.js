@@ -30,7 +30,7 @@ function question(n) {
 
   return result;
 }
-
+// if, while 문에서 i+=1 i++이나 ++i 등 증감을 쓰는 경우 > 최하단에 고정
 // 여기는 결과값 함수이므로 신경쓰지 않으셔도 됩니다!
 Test(
   question,

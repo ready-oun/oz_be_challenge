@@ -20,7 +20,7 @@
 
 function question(candies, friends) {
   // 여기에서 코드 작성해주세요!
-  let result = Math.floor(candies / friends);
+  let result = Math.floor(candies / friends); //Math.floor()소수점 이하 버림 Math.ceil()올림  Math.round 반올림
   return result;
 }
 
