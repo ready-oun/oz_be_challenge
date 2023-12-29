@@ -1,8 +1,8 @@
 // 첫 줄에 별을 하나 찍고 다음 줄로 넘어갈 수록 개수가 하나씩 늘게 반복
 
 // 첫 번째 별 모양 생성
-let parentEle = document.getElementById("star1"); // 'star1' 아이디를 가진 부모 엘리먼트를 찾음
-let star1 = document.createElement("div"); // 새로운 div 엘리먼트를 생성하여 star1 변수에 할당
+let parentEle = document.getElementById("star1_p"); // 'star1' 아이디를 가진 부모 엘리먼트를 찾음
+// let star1 = document.createElement("div"); // 새로운 div 엘리먼트를 생성하여 star1 변수에 할당
 
 for (let i = 0; i < 5; i++) {
   let line = document.createElement("p"); // 새로운 p 엘리먼트를 생성하여 각 줄을 표현할 변수 line에 할당
