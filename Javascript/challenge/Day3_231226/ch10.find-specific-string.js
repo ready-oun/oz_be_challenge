@@ -17,13 +17,19 @@
  *
  */
 
+// function name(string, target)
 function question(a, n) {
-  // 여기에서 코드 작성해주세요!
+  // 결과를 저장할 변수 초기화
   let result = 0;
-  for (let i = 0; i < a.length; i++) {
+  // 문자열 배열 a의 각 요소를 반복해서 확인 ; 0으로 시작해서 배열 a 길이보다 작게 루프
+  for (let i = 0; i < a.length; i += 1) {
+    // 배열 a에서 i번 인덱스가 n가 일치한지
     if (a[i] === n) {
+      // 목표 문자와 일치하면 결과 변수 증가
+      result += 1; // 어이 없어.. result 를 계속 return으로 써놓고 왜 안되노 이러고 있었다.
     }
   }
+  // 반복문이 끝난 후 최종 결과 반환
   return result;
 }
 
