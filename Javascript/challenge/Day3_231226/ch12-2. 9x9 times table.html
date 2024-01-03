@@ -19,7 +19,7 @@
         <th>8단</th>
         <th>9단</th>
       </tr>
-      <tr id="result">
+      <tr id="results">
         <td id="two"></td>
         <td id="three"></td>
         <td id="four"></td>
@@ -30,5 +30,18 @@
         <td id="nine"></td>
       </tr>
     </table>
+    <script>
+      const table = document.getElementById("results");
+
+      for (let i = 2; i <= 9; i += 1) {
+        let result = "";
+
+        for (let j = 1; j <= 9; j += 1) {
+          result += `${i} x ${j} = ${i * j}<br>`;
+        }
+        const row = table.children[i - 2]; // .children
+        row.innerHTML = result;
+      }
+    </script>
   </body>
 </html>
