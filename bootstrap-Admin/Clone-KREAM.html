@@ -12,13 +12,26 @@
               <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
               <select class="form-select" id="inlineFormSelectPref">
                 <!-- 카테고리 셀렉트 코드를 넣어주세요-->
+                <option selected>카테고리</option>
+                <option value="1">상의</option>
+                <option value="2">하의</option>
+                <option value="3">신발</option>
+                <option value="4">패션잡화</option>
               </select>
             </div>
             <div class="col-3">
                 <!-- input 입력창 코드를 넣어주세요 -->
+                <input
+                type="text"
+                class="form-control"
+                placeholder="제품명을 입력해주세요."
+                aria-label="input"
+                aria-describedby="basic-addon1"
+              />
               </div>
               <div class="col-auto">
                 <!-- 조회버튼 코드를 넣어주세요 -->
+                <button class="btn btn-primary">조회</button>
               </div>
           </form>
           <div class="container mt-3">
