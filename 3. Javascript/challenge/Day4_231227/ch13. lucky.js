@@ -22,20 +22,20 @@ function question(n, m) {
   // 여기에서 코드 작성해주세요!
   let result = 0;
 
-  for (let i = 0; i <= 10; i += 1) {
-    const rn = Math.random();
-    const luckyNo = Math.floor(rn * 10) + 1;
+  for (let i = 1; i <= 10; i += 1) {
+    const luckyNo = Math.floor(Math.random() * 9) + 1; // 0 이상 9미만 난수 +1 (1~9)
 
-    if (result !== 0) {
-      if (result === n) {
-        console.log(`${i}회차 행운의 숫자 : ${luckyNo} 당첨!`);
-        result += 1;
-      } else {
-        console.log(`${i}회차 행운의 숫자 : ${luckyNo} 미당첨!`);
-      }
+    if (n === luckyNo) {
+      win = "당첨!";
+      result += 1;
+      console.log(`${i}회차 ☘️행운의 숫자☘️: ${luckyNo} ${win}`);
+    } else {
+      win = "낙첨...";
+      result += 1;
+      console.log(`${i}회차 ☘️행운의 숫자☘️: ${luckyNo} ${win}`);
     }
   }
-  console.log(`당첨금은 ${result}원 입니다.`);
+  console.log(`당첨금은 ${result * m}원 입니다.`);
 }
 
 question(4, 10000);
