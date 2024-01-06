@@ -47,11 +47,52 @@ Click [here] (https://docs.github.com/ko/get-started/writing-on-github/getting-s
 ![image description](https://myoctocat.com/assets/images/base-octocat.svg)
 For more details, click [here](https://docs.github.com/ko/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#images)
 
+or just drag the image here.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/25423296/163456776-7f95b81a-f1ed-45f7-b7ab-8fa810d529fa.png">
   <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/25423296/163456779-a8556205-d0a5-45e2-ac17-42d089e3c3f8.png">
   <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="https://user-images.githubusercontent.com/25423296/163456779-a8556205-d0a5-45e2-ac17-42d089e3c3f8.png">
 </picture>
+
+<!--Table-->
+
+| Header | Description |
+| ------ | ----------- |
+| cell1  | cell2       |
+| cell1  | cell2       |
+| cell1  | cell2       |
+| cell1  | cell2       |
+
+| Header | Description |
+| :----: | :---------: |
+| cell1  |    cell2    |
+| cell1  |    cell2    |
+| cell1  |    cell2    |
+| cell1  |    cell2    |
+
+| Header | Description |
+| -----: | ----------: |
+|  cell1 |       cell2 |
+|  cell1 |       cell2 |
+|  cell1 |       cell2 |
+|  cell1 |       cell2 |
+
+<!--Code-->
+
+`console.log('your message')`
+
+```js
+lots of msg
+```
+
+```ts
+lots of msg
+```
+
+```kotlin
+lots of msg
+```
 
 <!--Checklist -->
 
