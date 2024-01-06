@@ -3,14 +3,98 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        font-size: 32px;
+      }
+      body {
+        margin: 0 auto;
+      }
+      .container {
+        width: 350px;
+        height: 100vh;
+        margin: 0 auto;
+      }
+      .lotto {
+        text-align: center;
+      }
+
+      .numbers {
+        width: 350px;
+        height: 60px;
+        border: 1px solid gray;
+        border-radius: 6px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .eachnum {
+        font-size: 0.75rem;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        color: black;
+        background-color: red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
     <title>Lotto Game</title>
   </head>
   <body>
     <div class="container">
-      <h2>2023년 6월 26일 로또 번호 추첨</h2>
-      <button id="draw" type="button">추첨</button>
-      <button id="retry" type="button">다시</button>
+      <div class="lotto">
+        <h2 id="today">로또 번호 추첨</h2>
+        <div class="numbers"></div>
+        <button id="draw" type="button">추첨</button>
+        <button id="retry" type="button">다시</button>
+      </div>
     </div>
-    <script></script>
+    <script>
+      let lottoArr = [];
+      const colors = [
+        "whitesmoke",
+        "lightgreen",
+        "lightyellow",
+        "lightblue",
+        "gray",
+      ];
+
+      const numbersDiv = document.querySelector(".numbers");
+      const drawBtn = document.querySelector("#draw");
+      const retryBtn = document.querySelector("#retry");
+
+      function paintNum(number) {
+        const eachNumDiv = document.createElement("div");
+        let colorIndex = Math.floor(number / 10); // 번호대마다 다른 색깔 부여
+        eachNumDiv.classList.add("eachnum");
+        eachNumDiv.style.backgroundColor = colors[colorIndex];
+        eachNumDiv.textContent = number;
+        numbersDiv.appendChild(eachNumDiv);
+      }
+
+      drawBtn.addEventListener("click", function () {
+        while (lottoArr.length < 6) {
+          let rn = Math.floor(Math.random() * 45) + 1;
+          // indexOf(주어진 값이 몇 번 인덱스에 있는지 반환)로 존재하지 않는다(-1로 반환)로 가정.
+          if (lottoArr.indexOf(rn) === -1) {
+            lottoArr.push(rn);
+            paintNum(rn);
+          }
+          // lottoArr.push(rn); 바로 위 if조건 없이 push만 하면, rn이 동일하게 겹칠 수 있는 문제 발생. 따라서 중복 배제 조건 만들어야.
+        }
+        // console.log(lottoArr);
+      });
+
+      retryBtn.addEventListener("click", function () {
+        lottoArr.splice(0, 6);
+        numbersDiv.innerHTML = "";
+      });
+    </script>
   </body>
 </html>
