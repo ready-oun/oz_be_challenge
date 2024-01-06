@@ -6,6 +6,35 @@
     <title>Rock, paper, scissors</title>
   </head>
   <body>
-    <div class="container"></div>
+    <div class="container">
+      <h1>가위바위보 게임</h1>
+      <p>가위, 바위, 보 중 하나를 입력하세요👇</p>
+      <input type="text" id="input" placeholder="가위, 바위, 보" />
+      <button onclick="start()">승자는?</button>
+      <p id="result"></p>
+    </div>
+
+    <script>
+      function start() {
+        const options = ["가위", "바위", "보"];
+        const userInput = document.getElementById("input").value;
+        const computer = options[Math.floor(Math.random() * options.length)];
+        const result = document.getElementById("result");
+
+        if (options.includes(userInput)) {
+          result.textContent = `당신의 선택: ${userInput} | 컴퓨터의 선택: ${computer}`;
+        } else {
+          result.textContent = "가위, 바위, 보 중 하나를 입력하세요.";
+        }
+      }
+      function draw() {
+        if (user === computer) {
+          alert = "비겼습니다.";
+        }
+      }
+      /*   emojis["가위"] = "✌🏼";
+      emojis["바위"] = "✊🏼";
+      emojis["보"] = "✋🏼"; */
+    </script>
   </body>
 </html>
