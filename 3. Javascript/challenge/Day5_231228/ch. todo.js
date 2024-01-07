@@ -5,9 +5,25 @@ const todoList = document.getElementById("todo-list");
 const todoForm = document.getElementById("todo-form");
 let todoArr = [];
 
+// 로컬 저장소에 저장하기
+function saveTodos() {
+  const todoString = JSON.stringify(todoArr);
+  localStorage.setItem("myTodos", todoString);
+}
+
+// 할일 삭제하기
+function handleTodoDelBtnClick(clickedId) {
+  // clickedId를 제외하고 나머지만 남기는 Filter
+  todoArr = todoArr.filter(function (aTodo) {
+    return aTodo.todoId !== clickedId;
+  });
+  displayTodos();
+  saveTodos();
+}
+
 // 할일 수정하기
 function handleTodoItemClick(clickedId) {
-  todoArr.map(function (aTodo) {
+  todoArr = todoArr.map(function (aTodo) {
     if (aTodo.todoId === clickedId) {
       // 내가 클릭한 투두에 해당하는 아이디가 맵에서 나왔다
       return {
@@ -20,6 +36,7 @@ function handleTodoItemClick(clickedId) {
   });
   // 확인차 console.log(todoArr); 여기서 aTodo를 클릭했을 때, TodoDone이 True가 콘솔에 뜨는지 확인
   displayTodos();
+  saveTodos();
 }
 
 // 할일 추가, 표시, 수정, 삭제하기 각각 !
@@ -34,6 +51,8 @@ todoForm.addEventListener("submit", function (e) {
   }; // arr 키 밸류 값들 사이 콤마(,)로 나눠주지 않으면 에러가 발생한다.
   todoForm.todo.value = ""; // 작성하고 추가한 할일(input)을 작성칸에서 지우겠다(==빈칸으로 만들겠다).
   todoArr.push(toBeAdded); // ()가 아니라 {}를 작성해서 에러 발생함.
+  displayTodos(); // added it to update the display
+  saveTodos(); //로컬 스토리지에 추가하는 함수 호출
 });
 
 // displayTodos 함수:할일이 하나씩 추가될 때마다 보여주는 함수
@@ -57,19 +76,10 @@ function displayTodos() {
       handleTodoItemClick(aTodo.todoId);
     });
 
+    todoDelBtn.addEventListener("click", function () {
+      handleTodoDelBtnClick(aTodo.todoId);
+    });
     todoItem.appendChild(todoDelBtn);
     todoList.appendChild(todoItem);
   });
 }
-
-// handleTodoDelBtnClick 함수
-
-// handleTodoItemClick 함수
-
-// saveTodos 함수
-
-// loadTodos 함수
-
-// 할일 입력 후 제출하면 발생하는 이벤트 핸들링
-
-// 시작할 때 한번만!
