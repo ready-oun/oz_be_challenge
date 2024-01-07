@@ -11,6 +11,14 @@ function saveTodos() {
   localStorage.setItem("myTodos", todoString);
 }
 
+// 로컬 저장소에서 가져오기
+function loadTodos() {
+  const myTodos = localStorage.getItem("myTodos");
+  todoArr = JSON.parse(myTodos);
+  displayTodos();
+}
+loadTodos();
+
 // 할일 삭제하기
 function handleTodoDelBtnClick(clickedId) {
   // clickedId를 제외하고 나머지만 남기는 Filter
