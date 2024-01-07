@@ -5,6 +5,23 @@ const todoList = document.getElementById("todo-list");
 const todoForm = document.getElementById("todo-form");
 let todoArr = [];
 
+// 할일 수정하기
+function handleTodoItemClick(clickedId) {
+  todoArr.map(function (aTodo) {
+    if (aTodo.todoId === clickedId) {
+      // 내가 클릭한 투두에 해당하는 아이디가 맵에서 나왔다
+      return {
+        ...aTodo, // 그럼 기존의 투두 내용에다가 투두던을 반전시켜서 추가한다.
+        todoDone: !aTodo.todoDone, // 기존 aTodo 내용을 todoDone에 false(반대) 상태로 덮어써서 리턴한다.
+      };
+    } else {
+      return aTodo;
+    }
+  });
+  // 확인차 console.log(todoArr); 여기서 aTodo를 클릭했을 때, TodoDone이 True가 콘솔에 뜨는지 확인
+  displayTodos();
+}
+
 // 할일 추가, 표시, 수정, 삭제하기 각각 !
 
 // 할일 추가하는 액션 함수
@@ -28,10 +45,19 @@ function displayTodos() {
     const todoDelBtn = document.createElement("span"); // 삭제 버튼을 넣기 위한 텍스트 영역을 생성해서
     todoDelBtn.textContent = "x"; // 삭제를 의미하는 x 추가
     todoItem.textContent = aTodo.todoText; // 개체.속성명 / toBeAdded = {todoText: todoForm.todo.value ...}
+    if (aTodo.todoDone) {
+      todoItem.classList.add("done");
+    } else {
+      todoItem.classList.add("yet");
+    }
     todoItem.title = "클릭하면 완료됨";
     todoDelBtn.title = "클릭하면 삭제됨";
 
-    todoDelBtn.appendChild(todoDelBtn);
+    todoItem.addEventListener("click", function () {
+      handleTodoItemClick(aTodo.todoId);
+    });
+
+    todoItem.appendChild(todoDelBtn);
     todoList.appendChild(todoItem);
   });
 }
