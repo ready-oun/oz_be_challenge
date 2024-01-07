@@ -24,10 +24,12 @@
  */
 
 function question(str) {
-  // 여기에서 코드 작성해주세요!
-  let result;
-
-  return result;
+  // a-zA-Z가 아닌 문자를 빈 문자열('')로 대체하여 제거 > toLowerCase로 소문자로 변경
+  // g (==global): 문자열 전체에서 첫 번째 발견된 것뿐만 아니라 문자열 내의 모든 일치 항목을 찾는 플래그
+  const cutStr = str.replace(/[^a-zA-Z]/g, "").toLowerCase();
+  // 문자의 배열로 분할(문자열의 각 문자가 배열의 별개 요소로 되게 지정) > 뒤집고 > 뒤집힌 배열 요소를 다시 문자열로 결합(문자 간 구분자가 추가되지 않게 지정)
+  const reverseStr = cutStr.split("").reverse().join("");
+  return cutStr === reverseStr; // 비교
 }
 
 // 여기는 결과값 함수이므로 신경쓰지 않으셔도 됩니다!
