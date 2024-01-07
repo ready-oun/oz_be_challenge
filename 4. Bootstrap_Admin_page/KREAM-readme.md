@@ -1,6 +1,5 @@
 # KREAM Admin Page Project
-
-![Screenshot 2024-01-06 at 3 56 10 PM](https://github.com/ready-oun/oz_be_challenge/assets/148455749/8a4916fe-c478-496f-9f96-05bf7540a5bd)
+![Screenshot 2024-01-07 at 9 51 06 PM](https://github.com/ready-oun/oz_be_challenge/assets/148455749/caf84d91-0a5d-4c13-8f3b-a70bca178fc8)
 
 > 👑 **Goals** 👑
 >
