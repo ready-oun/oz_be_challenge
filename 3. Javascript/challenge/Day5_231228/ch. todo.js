@@ -14,9 +14,12 @@ function saveTodos() {
 // 로컬 저장소에서 가져오기
 function loadTodos() {
   const myTodos = localStorage.getItem("myTodos");
-  todoArr = JSON.parse(myTodos);
-  displayTodos();
+  if (myTodos !== null) {
+    todoArr = JSON.parse(myTodos);
+    displayTodos();
+  }
 }
+
 loadTodos();
 
 // 할일 삭제하기
@@ -65,20 +68,26 @@ todoForm.addEventListener("submit", function (e) {
 
 // displayTodos 함수:할일이 하나씩 추가될 때마다 보여주는 함수
 function displayTodos() {
+  todoArr = todoArr || []; // added to chked if todoArr is null or undefined, and initialize it as an empty array
   todoList.innerHTML = ""; // 기존 내용을 지우면서 시작한다 = 기존에 추가한 Input이 display 중임에도 새로운 input이 추가될 때마다 같이 중복되어 또 추가되므로, 기존 내용을 빈칸으로 만들어주는 작업.
   todoArr.forEach(function (aTodo) {
     // 배열의 요소 수 == 내 할일 목록 개수
     const todoItem = document.createElement("li"); // 리스트는 ul에 들어갈 거고, ul은 li를 쓰므로 ul이 아닌 li를 작성.
+    const todoTextContainer = document.createElement("div"); // added container for the complete todo text
+
     const todoDelBtn = document.createElement("span"); // 삭제 버튼을 넣기 위한 텍스트 영역을 생성해서
     todoDelBtn.textContent = "x"; // 삭제를 의미하는 x 추가
-    todoItem.textContent = aTodo.todoText; // 개체.속성명 / toBeAdded = {todoText: todoForm.todo.value ...}
+
+    todoTextContainer.textContent = aTodo.todoText; // added to display the complete todo text
+    todoItem.appendChild(todoTextContainer); // added
+    // todoItem.textContent = aTodo.todoText; // 개체.속성명 / toBeAdded = {todoText: todoForm.todo.value ...}
     if (aTodo.todoDone) {
       todoItem.classList.add("done");
     } else {
       todoItem.classList.add("yet");
     }
-    todoItem.title = "클릭하면 완료됨";
-    todoDelBtn.title = "클릭하면 삭제됨";
+    todoItem.title = "it will be done if you'd click it";
+    todoDelBtn.title = "it will be deleted if you'd click it";
 
     todoItem.addEventListener("click", function () {
       handleTodoItemClick(aTodo.todoId);
