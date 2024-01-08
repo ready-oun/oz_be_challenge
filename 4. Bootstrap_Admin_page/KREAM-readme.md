@@ -25,13 +25,19 @@
 
 ---
 
-#### ref.
+#### Updates
 
-- Login page
-- dark mode
-- page theme
-- link db
-- pay tab w/ hover(bottom of original tab)
-- search con init
-- update now > link
-- del btn
+- [x] 전체 선택 체크박스를 최소화 -> 테이블 헤더로 이동
+- [x] 남성, 여성, 남/여 페이지네이션 클릭 시 => active & categorize the table
+- [ ] Set list quantity on a single page (e.g. 10 items, 30 items ...)
+- [ ] search con init
+- [ ] del btn
+- [ ] Login page
+- [ ] dark mode
+- [ ] page theme
+- [ ] link db
+
+---
+
+- [ ] pay tab w/ hover(bottom of original tab)
+- [ ] update now > link
