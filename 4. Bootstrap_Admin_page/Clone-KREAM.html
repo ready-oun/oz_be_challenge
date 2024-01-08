@@ -154,22 +154,38 @@
       const bothPage = document.getElementById('both')
 
       malePage.addEventListener('click', ()=> {
-        malePage.classList.add('active')
-        femalePage.classList.remove('active')
-        bothPage.classList.remove('active')
-        filterData('남성')
+        if (malePage.classList.contains('active') !==true) {
+          malePage.classList.add('active')
+          femalePage.classList.remove('active')
+          bothPage.classList.remove('active')
+          filterData('남성')
+        } else { // click 해제 > active 포함 안 하게 됨 > 전체 목록 표시
+          malePage.classList.remove('active')
+          filterData()
+        }    
       })
       femalePage.addEventListener('click', ()=> {
-        malePage.classList.remove('active')
-        femalePage.classList.add('active')
-        bothPage.classList.remove('active')
-        filterData('여성')
+        if (femalePage.classList.contains('active') !==true) {
+          malePage.classList.remove('active')
+          femalePage.classList.add('active')
+          bothPage.classList.remove('active')
+          filterData('여성')
+        } else {
+          femalePage.classList.remove('active')
+          filterData()
+        }
+        
       })
       bothPage.addEventListener('click', ()=> {
-        malePage.classList.remove('active')
-        femalePage.classList.remove('active')
-        bothPage.classList.add('active')
-        filterData('남/여')
+        if (bothPage.classList.contains('active') !==true) {
+          malePage.classList.remove('active')
+          femalePage.classList.remove('active')
+          bothPage.classList.add('active')
+          filterData('남/여')
+        } else {
+          bothPage.classList.remove('active')
+          filterData()
+        }
       })
       
       // 성별 필터링: 기존 행들 비우고, 성별 일치 or 남/여에 해당하는 행 삽입 
@@ -178,7 +194,7 @@
           dataTable.deleteRow(0)
         }
         data.forEach((item) => {
-        if (item.gender === gender || item.gender === '남/여' ) {
+        if (item.gender === gender || item.gender === '남/여' || gender === undefined) {
           const row = dataTable.insertRow();
           const checkboxCell = row.insertCell(); // 삭제할 때, checkbox가 사라져서 새로 삽입
           const checkbox = document.createElement('input');
