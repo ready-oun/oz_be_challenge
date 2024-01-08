@@ -29,8 +29,13 @@
 
 - [x] 전체 선택 체크박스를 최소화 -> 테이블 헤더로 이동
 - [x] 남성, 여성, 남/여 페이지네이션 클릭 시 => active & categorize the table
-- [ ] Set list quantity on a single page (e.g. 10 items, 30 items ...)
+  - [ ] init when double click
+- [ ] - activate Categories
+- [ ] - activate search engine
+- [ ] - activate pagination features <<< 1 2 3 >>>
 - [ ] search con init
+- [ ] Set list quantity on a single page (e.g. 10 items, 30 items ...)
+- [ ] Check out btn >> btn clicked
 - [ ] del btn
 - [ ] Login page
 - [ ] dark mode
