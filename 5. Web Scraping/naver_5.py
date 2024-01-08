@@ -24,6 +24,7 @@ soup = BeautifulSoup(html, "html.parser")
 # view_wrap : 글 박스 데이터 싹 다 
 
 total_area = soup.select(".view_wrap")
+ad_area = soup.select(".bx_type_ad")
 
 # 에러 처리
 if total_area: 
@@ -32,7 +33,14 @@ else :
     print("클래스를 변경해 주세요.")
 
 # for문과 zip : Title & name 을 한 쌍으로 묶어서 i에 
+rank_num = 1 # 1. 넘버링 선언 
 for i in areas:
+    ad = i.select_one(".link_ad")
+    if ad:
+        # print(">광고주의<") 광고 빼고 순수 데이터만 추출하려면 continue로 직행 
+        continue
+    print(f'[{rank_num}]') # 3. 넘버링 출력 
+    
     title = i.select_one(".title_link._cross_trigger") # 두 클래스 사이에 ._ 임.. 점 1개만 넣는 게 아니라 
     name = i.select_one(".name")
     print(title.text)
@@ -40,3 +48,4 @@ for i in areas:
     print(title['href']) # href로 타이틀에 포함된 링크 추출
     print() 
 
+    rank_num +=1 # 2. 넘버링 1씩 증가 
