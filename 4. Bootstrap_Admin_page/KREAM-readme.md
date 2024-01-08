@@ -32,3 +32,6 @@
 - page theme
 - link db
 - pay tab w/ hover(bottom of original tab)
+- search con init
+- update now > link
+- del btn
