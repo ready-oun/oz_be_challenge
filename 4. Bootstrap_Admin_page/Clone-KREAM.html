@@ -104,12 +104,12 @@
       // 크롤링한 데이터를 아래와 같은 형태의 객체 배열로 가정합니다.
       // 추후 데이터베이스에 있는 데이터를 쿼리문으로 불러 올 수 있게 쿼리르 작성해 볼 수 있음
       const data = [
-          { category: "상의", gender: "남자", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
-          { category: "하의", gender: "남자", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+          { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+          { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
           { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
           { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
-          { category: "상의", gender: "남자", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
-          { category: "하의", gender: "남자", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+          { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+          { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
           { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
           { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' }          
       ];
@@ -157,21 +157,42 @@
         malePage.classList.add('active')
         femalePage.classList.remove('active')
         bothPage.classList.remove('active')
+        filterData('남성')
       })
       femalePage.addEventListener('click', ()=> {
         malePage.classList.remove('active')
         femalePage.classList.add('active')
         bothPage.classList.remove('active')
+        filterData('여성')
       })
       bothPage.addEventListener('click', ()=> {
         malePage.classList.remove('active')
         femalePage.classList.remove('active')
         bothPage.classList.add('active')
+        filterData('남/여')
       })
       
-      // 성별 필터링
-      
-      
+      // 성별 필터링: 기존 행들 비우고, 성별 일치 or 남/여에 해당하는 행 삽입 
+      function filterData(gender) {
+        while (dataTable.rows.length > 0) {
+          dataTable.deleteRow(0)
+        }
+        data.forEach((item) => {
+        if (item.gender === gender || item.gender === '남/여' ) {
+          const row = dataTable.insertRow();
+          const checkboxCell = row.insertCell(); // 삭제할 때, checkbox가 사라져서 새로 삽입
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkboxCell.appendChild(checkbox);
+          row.insertCell().innerHTML = item.category;
+          row.insertCell().innerHTML = item.gender;
+          row.insertCell().innerHTML = item.brand;
+          row.insertCell().innerHTML = item.product;
+          row.insertCell().innerHTML = item.price;
+        }
+      })
+      }
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
