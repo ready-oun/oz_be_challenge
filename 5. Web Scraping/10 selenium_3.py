@@ -12,19 +12,26 @@ base_url = "https://search.naver.com/search.naver?where=view&sm=tab_jum&query="
 key_word = input("검색어를 입력해주세요 : ")
 # 탐색을 원하는 Url
 url = base_url + key_word
+
 # 탐색을 원하는 사이트의 데이터 달라고 요청 
-req = requests.get(url, headers=header_user) 
+driver = webdriver.Chrome() # init 
+driver.get(url) 
+time.sleep(5)
 
-html = req.text 
-soup = BeautifulSoup(html, "html.parser")
-
-# print(soup)
-
-# 가져오고 싶은 HTML class 를 복붙해와서 저장~! 
-# VIEW 탭의 글제목과 작성자 클래스 가져오기 
-# title_link _cross_trigger : 글 제목
-# name : 작성자
-# view_wrap : 글 박스 데이터 싹 다 
+# 스크롤 실행 코드 
+# driver.execute_script("window.scrollTo(0, 10000)") #js에서 써본 window.scrollTo... 0부터 3000 기준으로 스크롤 자동으로 내리게 함 
+# 위에걸로는 택도 없어서..
+    # Range(5) 해도 ㅇㅋ
+for i in range(10):
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight)") # document.body.scrollHeight -- document. 빼먹지 말자..
+    time.sleep(0.05)
+# 스크롤을 수동으로 해주지 않으면 안 되노 .....
+# 그렇다면 for 문을 돌리자 ! 
+# 위치가 문제였다 ? 
+    # html에 저장하기 전에 데이터들을 스크롤해서 가져와서 소스를 쌓아서 html에 담아야 한다. 그래서 위치를 앞으로 옮김.
+    
+html = driver.page_source #page source만 추출 
+soup = BeautifulSoup(html, "html.parser") # html 구조화 
 
 total_area = soup.select(".view_wrap")
 ad_area = soup.select(".bx_type_ad")
@@ -34,6 +41,8 @@ if total_area:
     areas = total_area 
 else :
     print("클래스를 변경해 주세요.")
+
+
 
 # for문과 zip : Title & name 을 한 쌍으로 묶어서 i에 
 rank_num = 1 # 1. 넘버링 선언 
