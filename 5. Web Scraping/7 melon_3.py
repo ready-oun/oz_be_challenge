@@ -16,8 +16,9 @@ def get_nums(song_num_text):
     song_num = "".join([num for num in song_num_text if num.isdigit()]) 
     return song_num # return으로 뱉어줘야 함
     
-    # print(song_num)
-    # print(type(song_num))
+    # .join() 메서드는 문자열을 결합하는 데 사용하는 파이썬 내장 메서드. 문자열 결합 시, 리스트나 튜플과 같은 반복 가능한(iterable) 객체의 요소들을 하나의 문자열로 연결하는 데에도 사용
+    # .join() 메서드는 문자열을 기준으로 요소들을 결합함. 호출한 문자열을 구분자로 사용, 구분자로 사용된 문자열 사이에 연결할 요소들 삽입. 
+    # .isdigit() 메서드는 숫자만 추출
 
 # get_nums(song_num_text) # 매개변수 아무 거나 넣어도 상관없다.
 

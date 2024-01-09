@@ -18,7 +18,7 @@ lst100 = soup.select(".lst100")
 lst_all = lst50 + lst100
 
 for rank, i in enumerate(lst_all, 1):
-    title = i.select_one(".ellipsis.rank01 a") # 줄바꿈 없애기 - select_one().a 해서 a태그 선택? 
+    title = i.select_one(".ellipsis.rank01 a") # 줄바꿈 없애기 - select_one().a 해서 a태그 선택? > rank 02 안에 a 태그가 있어서 > a 태그를 가져오라고 명시한 겨 
     singer = i.select_one(".checkEllipsis a")
     album = i.select_one(".ellipsis.rank03 a")
     
