@@ -1,3 +1,7 @@
+<!-- 신규 발매 상품(https://kream.co.kr/exhibitions/2082) 긁어오기 
+  > 아이템 페이지(https://kream.co.kr/products/"product_id value)에서 
+  정보(class) 추출 -->
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -52,6 +56,7 @@
           <div class="container mt-3">
         <table class="table table-sm">
           <nav class="d-grid gap-2 d-md-flex justify-content-md-end" aria-label="...">
+            <!-- 크림에는 딱히 성별 구분이 없어서 배송(일반 Vs 브랜드배송 vs 빠른배송 vs 무료배송 vs 창고보관 으로 구분해도 될 듯?) 아니면, 할인/비할인/적립 ? -->
             <ul class="pagination pagination-sm" id="gender-page">
               <li class="page-item" aria-current="page" id="male">
                 <span class="page-link">남성</span> <!-- js로 active > id 부여 -->
@@ -111,8 +116,24 @@
           { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
           { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
           { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
-          { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' }          
+          { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' }, 
+          { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+          { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+          { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
+          { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
+          { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+          { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+          { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
+          { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },          { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+          { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+          { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
+          { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
+          { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+          { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+          { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
+          { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' }         
       ];
+      // 이거 왜 수량이 오버되면 아예 안 보이는 거지 Css? 
       
       const dataTable = document.getElementById('data-table');
       
@@ -187,7 +208,7 @@
           filterData()
         }
       })
-      
+      // 스터디원 조언 : 
       // 성별 필터링: 기존 행들 비우고, 성별 일치 or 남/여에 해당하는 행 삽입 
       function filterData(gender) {
         while (dataTable.rows.length > 0) {
