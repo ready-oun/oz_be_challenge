@@ -124,7 +124,8 @@
           { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
           { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
           { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
-          { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },          { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+          { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },          
+          { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
           { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
           { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
           { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
@@ -133,7 +134,7 @@
           { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
           { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' }         
       ];
-      // 이거 왜 수량이 오버되면 아예 안 보이는 거지 Css? 
+      // 이거 왜 수량이 오버되면 아예 안 보이는 거지 Css? 하.. 그냥 중간에 , 가 빠져서 그런 거였음 왜 해보고 그때도 오류나서 , 삽입했었는데 까먹은 거지 
       
       const dataTable = document.getElementById('data-table');
       
@@ -208,7 +209,8 @@
           filterData()
         }
       })
-      // 스터디원 조언 : 
+      // 스터디원 조언 : 이러면 추후 실제 데이터를 크롤링했을 때 여러 페이지에서 페이지마다 보이는 목록 개수가 다 달라져서 지양 권장
+      // ㄴ이 filterData 함수 방법은 페이지 내 행을 안 보이게 하는 거라서 -> 조건에 부합하는 데이터를 불러오는 방법으로 변경 추천 !! (예시 데이터 수량 자체가 적어서 아예 생각도 못했다)
       // 성별 필터링: 기존 행들 비우고, 성별 일치 or 남/여에 해당하는 행 삽입 
       function filterData(gender) {
         while (dataTable.rows.length > 0) {
