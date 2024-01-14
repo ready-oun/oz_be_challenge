@@ -89,7 +89,7 @@
     </div>
     <!-- 페이지 네이션 코드 -->
     <nav aria-label="Page navigation example">
-        <ul class="pagination">
+        <ul class="pagination justify-content-center">
           <li class="page-item">
             <a class="page-link" href="#" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
@@ -180,10 +180,12 @@
           malePage.classList.add('active')
           femalePage.classList.remove('active')
           bothPage.classList.remove('active')
-          filterData('남성')
+          let filterGender = malePage.filter((element)=>{
+            return element.gender == 'male'
+          })          
         } else { // click 해제 > active 포함 안 하게 됨 > 전체 목록 표시
           malePage.classList.remove('active')
-          filterData()
+          return element.gender == undefined
         }    
       })
       femalePage.addEventListener('click', ()=> {
@@ -212,25 +214,25 @@
       // 스터디원 조언 : 이러면 추후 실제 데이터를 크롤링했을 때 여러 페이지에서 페이지마다 보이는 목록 개수가 다 달라져서 지양 권장
       // ㄴ이 filterData 함수 방법은 페이지 내 행을 안 보이게 하는 거라서 -> 조건에 부합하는 데이터를 불러오는 방법으로 변경 추천 !! (예시 데이터 수량 자체가 적어서 아예 생각도 못했다)
       // 성별 필터링: 기존 행들 비우고, 성별 일치 or 남/여에 해당하는 행 삽입 
-      function filterData(gender) {
-        while (dataTable.rows.length > 0) {
-          dataTable.deleteRow(0)
-        }
-        data.forEach((item) => {
-        if (item.gender === gender || item.gender === '남/여' || gender === undefined) {
-          const row = dataTable.insertRow();
-          const checkboxCell = row.insertCell(); // 삭제할 때, checkbox가 사라져서 새로 삽입
-          const checkbox = document.createElement('input');
-          checkbox.type = 'checkbox';
-          checkboxCell.appendChild(checkbox);
-          row.insertCell().innerHTML = item.category;
-          row.insertCell().innerHTML = item.gender;
-          row.insertCell().innerHTML = item.brand;
-          row.insertCell().innerHTML = item.product;
-          row.insertCell().innerHTML = item.price;
-        }
-      })
-      }
+      // function filterData(gender) {
+      //   while (dataTable.rows.length > 0) {
+      //     dataTable.deleteRow(0)
+      //   }
+      //   data.forEach((item) => {
+      //   if (item.gender === gender || item.gender === '남/여' || gender === undefined) {
+      //     const row = dataTable.insertRow();
+      //     const checkboxCell = row.insertCell(); // 삭제할 때, checkbox가 사라져서 새로 삽입
+      //     const checkbox = document.createElement('input');
+      //     checkbox.type = 'checkbox';
+      //     checkboxCell.appendChild(checkbox);
+      //     row.insertCell().innerHTML = item.category;
+      //     row.insertCell().innerHTML = item.gender;
+      //     row.insertCell().innerHTML = item.brand;
+      //     row.insertCell().innerHTML = item.product;
+      //     row.insertCell().innerHTML = item.price;
+      //   }
+      // })
+      // }
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
