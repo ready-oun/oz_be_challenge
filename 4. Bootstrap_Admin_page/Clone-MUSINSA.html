@@ -1,5 +1,5 @@
-<!-- 신규 발매 상품(https://kream.co.kr/exhibitions/2082) 긁어오기 
-  > 아이템 페이지(https://kream.co.kr/products/"product_id value)에서 
+<!-- 신규 발매 상품(https://www.musinsa.com/app/news/lists?type=2) 긁어오기 
+  > 아이템 페이지(https://www.musinsa.com/app/goods/3790187)에서 
   정보(class) 추출 -->
 
 <!DOCTYPE html>
@@ -56,8 +56,8 @@
           <div class="container mt-3">
         <table class="table table-sm">
           <nav class="d-grid gap-2 d-md-flex justify-content-md-end" aria-label="...">
-            <!-- 크림에는 딱히 성별 구분이 없어서 배송(일반 Vs 브랜드배송 vs 빠른배송 vs 무료배송 vs 창고보관 으로 구분해도 될 듯?) 아니면, 할인/비할인/적립 ? -->
-            <ul class="pagination pagination-sm" id="gender-page">
+            <!-- 무신사 성별 구분으로 가즈아 -->
+            <ul class="pagination pagination-sm" id="gender-filter">
               <li class="page-item" aria-current="page" id="male">
                 <span class="page-link">남성</span> <!-- js로 active > id 부여 -->
               </li>
@@ -180,7 +180,7 @@
           malePage.classList.add('active')
           femalePage.classList.remove('active')
           bothPage.classList.remove('active')
-          let filterGender = malePage.filter((element)=>{
+          let malePage = filterGender.filter((element)=>{
             return element.gender == 'male'
           })          
         } else { // click 해제 > active 포함 안 하게 됨 > 전체 목록 표시
@@ -188,15 +188,16 @@
           return element.gender == undefined
         }    
       })
+      
       femalePage.addEventListener('click', ()=> {
         if (femalePage.classList.contains('active') !==true) {
           malePage.classList.remove('active')
           femalePage.classList.add('active')
           bothPage.classList.remove('active')
-          filterData('여성')
+          // filterData('여성')
         } else {
           femalePage.classList.remove('active')
-          filterData()
+          // filterData()
         }
         
       })
@@ -205,10 +206,10 @@
           malePage.classList.remove('active')
           femalePage.classList.remove('active')
           bothPage.classList.add('active')
-          filterData('남/여')
+          // filterData('남/여')
         } else {
           bothPage.classList.remove('active')
-          filterData()
+          // filterData()
         }
       })
       // 스터디원 조언 : 이러면 추후 실제 데이터를 크롤링했을 때 여러 페이지에서 페이지마다 보이는 목록 개수가 다 달라져서 지양 권장
