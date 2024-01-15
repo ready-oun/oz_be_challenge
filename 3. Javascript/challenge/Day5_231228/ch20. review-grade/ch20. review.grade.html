@@ -66,20 +66,16 @@
     </div>
 
     <script>
-      const scoreTable = document.querySelector(
-        "#score_table tr:nth-child(2) td:nth-child(2)"
-      );
-      console.log(scoreTable);
+      // 테이블 모든 행 선택 -> 배열로 변환 : Array.from(~selectorAll tr)
 
-      // table #score #score_over75
-      //   const scoreTable = document.getElementById("score_table");
-      //   const scoreNum = document.getElementsByTagName("td"); // 2행부터 2열만 뽑아내게 어케 함
+      // 1행 헤더 제외 .slice(1)
 
-      // console.log(scoreNum);
-      //   const scoreOver75 = document.getElementById("score_over75")
+      // over 75 필터링 .filter( => {(row.querySelector("td:nth-child(2)").innerText); return 000 > 75; ?! ? })
 
-      //   // call num of scores of each mem ==> array, filter
-      //   const allScores
+      // 점수 높은 순 정렬 : .sort()
+
+      // 이름 추출 & 출력 : td:first-child >>> .join(",")
+      document.getElementById("score_over75").innerText = // names
     </script>
   </body>
 </html>
