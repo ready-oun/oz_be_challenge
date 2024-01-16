@@ -10,7 +10,7 @@ connection = pymysql.connect(
     cursorclass=pymysql.cursors.DictCursor 
     # DictCursor = Dictionary 형태로 DB를 Cursor(Return)해달라! 라는 뜻. 
 )
-
+# (2) CRUD
 ## 1. SELECT *& FROM
 def get_customers():
     cursor = connection.cursor()
