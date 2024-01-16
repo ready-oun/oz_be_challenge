@@ -49,10 +49,83 @@ USE classicmodels;
 -- GROUP BY productLine; 
 
 -- -- 고객별 총 주문 금액: 각 고객별로 총 주문 금액을 계산하세요.
-SELECT customers.customerNumber,
-		customers.customerName,
-        SUM(orderdetails.quantityOrdered * orderdetails.priceEach) AS totalAmount
-FROM customers
+-- SELECT customers.customerNumber,
+-- 		customers.customerName,
+--         SUM(orderdetails.quantityOrdered * orderdetails.priceEach) AS totalAmount
+-- FROM customers
 -- JOIN orders ON customers.customerNumber = orders.customerNumber
 -- JOIN orderdetails ON orders.orderNumber = orderdetails.orderNumber
--- GROUP BY customers.customerNumber, customers.customerName;
+-- GROUP BY customers.customerNumber, customers.customerName
+-- ORDER BY totalAmount DESC;
+
+-- -- 가장 많이 팔린 제품: 가장 많이 판매된 제품의 이름과 판매 수량을 조회하세요.
+-- SELECT productName, SUM(quantityOrdered) AS totalQuantity
+-- FROM orderdetails od
+-- JOIN products p ON od.productCode = p.productCode
+-- GROUP BY productName
+-- ORDER BY totalQuantity DESC 
+-- LIMIT 10;
+
+-- -- 매출이 가장 높은 사무실: 가장 많은 매출을 기록한 사무실의 위치와 매출액을 조회하세요.
+-- SELECT o.city, SUM(od. quantityOrdered * od.priceEach) AS totalSales
+-- FROM orders ord
+-- JOIN orderdetails od ON ord.orderNumber = od.orderNumber
+-- JOIN customers c ON ord.customerNumber = c.customerNumber
+-- JOIN employees e ON c.salesRepEmployeeNumber = e.employeeNumber
+-- JOIN offices o ON e.officeCode = o.officeCode
+-- GROUP BY o.city
+-- ORDER BY totalSales DESC 
+-- LIMIT 1;
+
+-- -- << 서브쿼리 >> 
+-- 특정 금액 이상의 주문: 500달러 이상의 총 주문 금액을 기록한 주문들을 조회하세요.
+-- SELECT orderNumber, SUM(quantityOrdered * priceEach) AS totalAmount
+-- FROM orderdetails
+-- GROUP BY orderNumber
+-- HAVING totalAmount > 500
+-- ORDER BY totalAMount DESC;
+
+-- -- 평균 이상 결제 고객: 평균 결제 금액보다 많은 금액을 결제한 고객들의 목록을 조회하세요.
+-- SELECT customerNumber, SUM(amount) AS totalPayment
+-- FROM payments
+-- GROUP BY customerNumber
+-- HAVING totalPayment > (SELECT AVG(amount) FROM payments)
+-- ORDER BY totalPayment DESC;
+
+-- -- 주문 없는 고객: 아직 주문을 하지 않은 고객의 목록을 조회하세요.
+-- SELECT customerName
+-- FROM customers
+-- WHERE customerNumber NOT IN (SELECT customerNumber FROM orders)
+-- ORDER BY customerName;
+
+-- -- 최대 매출 고객: 가장 많은 금액을 지불한 고객의 이름과 총 결제 금액을 조회하세요.
+-- SELECT c.customerName, SUM(od.quantityOrdered * od.priceEach) AS totalSpent
+-- FROM customers c
+-- JOIN orders o ON c.customerNumber = o.customerNumber
+-- JOIN orderdetails od ON o.orderNumber = od.orderNumber
+-- GROUP BY c.customerName
+-- ORDER BY totalSpent DESC
+-- LIMIT 1;
+
+-- -- << ### **데이터 수정 및 관리**>>
+-- -- 신규 고객 추가: 'customers' 테이블에 새로운 고객을 추가하는 쿼리를 작성하세요.
+-- -- 현재 customerNumber가 없어서 실행이 안 됨. 
+-- INSERT INTO customers (customerName, contactLastName, contactFirstName, phone, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit) 
+-- VALUES ('New Customer', 'Lastname', 'Firstname', '123-456-7890', '123 Street', 'Suite 1', 'City', 'State', 'PostalCode', 'Country', 1002, 50000.00); 
+
+-- -- 제품 가격 변경: 'Classic Cars' 제품 라인의 모든 제품 가격을 10% 인상하는 쿼리를 작성하세요.
+-- UPDATE products
+-- SET buyPrice = buyPrice * 1.10
+-- WHERE productLine = 'Classic Cars';
+-- --> 경고 메시지는 'buyPrice' 열의 데이터가 잘리는(truncated) 경고입니다. 이는 증가된 가격이 데이터베이스의 열 크기보다 크기 때문에 발생하는 경고입니다. 그러나 데이터가 잘리더라도 변경 작업은 성공적으로 수행되었습니다.
+-- --> 제품의 가격을 변경할 때 데이터가 잘리지 않도록 열의 크기를 적절히 조정하거나, 데이터 타입을 변경하여 충분한 공간을 확보할 수 있습니다. 또는 가격 열의 소수점 자리수를 조정하여 데이터 손실 없이 가격을 증가시킬 수도 있습니다.
+
+-- -- 고객 데이터 업데이트: 특정 고객의 이메일 주소를 변경하는 쿼리를 작성하세요.
+-- UPDATE customers
+-- SET phone = '010-0000-0000'
+-- WHERE customerNumber = 103;
+
+-- 직원 전보: 특정 직원을 다른 사무실로 이동시키는 쿼리를 작성하세요.
+-- UPDATE employees
+-- SET officeCode = '2' -- > 문자열 데이터 타입 = VARCHAR
+-- WHERE employeeNumber = 1002; -- > 숫자 데이터 타입 = int
