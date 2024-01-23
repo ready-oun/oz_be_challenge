@@ -13,7 +13,10 @@ USE KREAM;
 --     price DECIMAL(10, 2) NOT NULL,
 --     FOREIGN KEY (category_id) REFERENCES category(category_id)
 -- );
-    
+
+
+
+
 -- category 
 -- INSERT INTO category (category_id, category_name)
 -- VALUES
@@ -30,3 +33,12 @@ USE KREAM;
 --     (11, '테크'),
 --     (43, '캠핑'),
 --     (68, '가구/리빙');
+
+-- SELECT p.*, c.category_name
+-- FROM product p
+-- JOIN category c ON p.category_id = c.category_id;
+
+
+update product p
+join category c on p.category_name = c.category_name
+SET p.category_id = c.category_id;

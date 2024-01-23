@@ -59,46 +59,50 @@ for cat_id, cat_name in categories.items():
     cat_gen_url = ''
     if cat_id in [7, 67, 46, 11, 43, 68]:
         cat_gen_url = f'{base_url}{cat_id}'
-        print("*" * 10, f"{cat_name}에서 상품 페이지를 읽고 있습니다.", "*" * 10)
+        driver.get(cat_gen_url)
+        time.sleep(1)
+        print(cat_gen_url)
+        # print("*" * 10, f"{cat_name}에서 상품 페이지를 읽고 있습니다.", "*" * 10)
     else:
         for gen_key, gen_name in gender.items():
             cat_gen_url = f'{base_url}{cat_id}{gen_key}'
-            print("*" * 10, f"{cat_name} - {gen_name}에서 상품 페이지를 읽고 있습니다.", "*" * 10)
-            time.sleep(0.5)
+            # print(cat_gen_url)
+            # print("*" * 10, f"{cat_name} - {gen_name}에서 상품 페이지를 읽고 있습니다.", "*" * 10)
+            # time.sleep(0.5)
+            print(cat_gen_url)
+            driver.get(cat_gen_url)
+            time.sleep(1)
 
-        driver.get(cat_gen_url)
-        time.sleep(3)
+            html = driver.page_source
+            soup = BeautifulSoup(html, "html.parser")
+            items = soup.select('.item_inner')
 
-        html = driver.page_source
-        soup = BeautifulSoup(html, "html.parser")
-        items = soup.select('.item_inner')
+            for i in items:
+                product_brand = i.select_one(".product_info_brand.brand")
+                product_name = i.select_one(".product_info_product_name")
+                product_price = i.select_one(".amount") 
 
-        for i in items:
-            product_brand = i.select_one(".product_info_brand.brand")
-            product_name = i.select_one(".product_info_product_name")
-            product_price = i.select_one(".amount") 
-
-            # 데이터를 리스트에 추가
-            product_list.append([
-                cat_name,
-                gen_name,
-                product_brand.text,
-                product_name.text,
-                product_price.text
-            ])
+                # 데이터를 리스트에 추가
+                product_list.append([
+                    cat_name,
+                    gen_name,
+                    product_brand.text,
+                    product_name.text,
+                    product_price.text
+                ])
 
 # 크롤링이 끝난 후 드라이버 종료
 time.sleep(5)            
 driver.quit()
 
 # 크롤링한 데이터 출력
-for product in product_list:
-    gender - product[1]
-    if not gender:
-        gender = "미분류"
-    print(f'카테고리 : {product[0]}')
-    print(f'성 별 : {product}')
-    print(f'브랜드 : {product[2]}')
-    print(f'제품명 : {product[3]}')
-    print(f'가 격 : {product[4]}')
-    print()
+# for product in product_list:
+#     gender = product[1]
+#     if not gender:
+#         gender = "미분류"
+#     print(f'카테고리 : {product[0]}')
+#     print(f'성 별 : {gender}')
+#     print(f'브랜드 : {product[2]}')
+#     print(f'제품명 : {product[3]}')
+#     print(f'가 격 : {product[4]}')
+#     print()

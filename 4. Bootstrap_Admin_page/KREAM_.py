@@ -80,42 +80,61 @@ try:
         cat_names = list(categories.values())
 
         for cat_id, cat_name in categories.items():
-            for gen_key, gen_name in gender.items():
-                cat_gen_url = f'{base_url}{cat_id}{gen_key}'
-                print("*" *10, f"{cat_name} - {gen_name}에서 상품 페이지를 읽고 있습니다.", "*" *10)
-                time.sleep(0.5)
-
+            cat_gen_url = ''
+            if cat_id in [7, 67, 46, 11, 43, 68]:
+                cat_gen_url = f'{base_url}{cat_id}'
+                print("*" * 10, f"{cat_name}에서 상품 페이지를 읽고 있습니다.", "*" * 10)
                 driver.get(cat_gen_url)
-                time.sleep(3)
+                time.sleep(0.5)
 
                 html = driver.page_source
                 soup = BeautifulSoup(html, "html.parser")
                 items = soup.select('.item_inner')
-                # items = soup.select('.search_result_item.product')
-
-                # CLASS_NAME (Fri, JAN 19th 16:13 updated)
-                #     item: search_result_item product // item_inner
-                #     brand: product_info_brand brand
-                #     name: product_info_product_name
-                #     price: amount
 
                 for i in items:
                     product_brand = i.select_one(".product_info_brand.brand")
                     product_name = i.select_one(".product_info_product_name")
                     product_price = i.select_one(".amount")
-                    price_text = product_price.text 
-                    numeric_price = ''.join(c for c in price_text if c.isdigit())
 
+                    # Gender undef
+                    gen_val = None
                     #insert into
                     q_insert = '''INSERT INTO product (
                     category_name, gender, brand, product_name, price
                     ) 
                     VALUES (%s, %s, %s, %s, %s)
                     '''
-                    to_tuple = (cat_name, gen_name, product_brand.text, product_name.text, numeric_price)
-                    cursor.execute(q_insert, to_tuple)
+                    to_tuple = (cat_name, gen_val, product_brand.text, product_name.text, product_price.text)
+                    cursor.execute(q_insert, to_tuple)                
+            else:
+                for gen_key, gen_name in gender.items():
+                    cat_gen_url = f'{base_url}{cat_id}{gen_key}'
+                    print("*" *10, f"{cat_name} - {gen_name}에서 상품 페이지를 읽고 있습니다.", "*" *10)
+                    time.sleep(0.5)
 
-            connection.commit()
+                    driver.get(cat_gen_url)
+
+                    html = driver.page_source
+                    soup = BeautifulSoup(html, "html.parser")
+                    items = soup.select('.item_inner')
+
+                    for i in items:
+                        product_brand = i.select_one(".product_info_brand.brand")
+                        product_name = i.select_one(".product_info_product_name")
+                        product_price = i.select_one(".amount")
+
+                        # Gender undef
+                        gen_val = gen_name
+                        #insert into
+                        q_insert = '''INSERT INTO product (
+                        category_name, gender, brand, product_name, price
+                        ) 
+                        VALUES (%s, %s, %s, %s, %s)
+                        '''
+                        to_tuple = (cat_name, gen_val, product_brand.text, product_name.text, product_price.text)
+                        cursor.execute(q_insert, to_tuple)
+
+    connection.commit()
 
 finally: 
     driver.quit()
