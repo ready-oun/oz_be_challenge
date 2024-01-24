@@ -1,0 +1,215 @@
+  <!DOCTYPE html>
+  <html lang="ko">
+  <head>
+      <title>Admin Page</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+      <style>
+        .form-check {
+          padding-left: 0;
+          padding-right: 1.5em
+        }
+      </style>
+  </head>
+  <body>
+      <div class="container mt-3">
+        <!-- BT 에서 깃허브 아이콘 삽입 -->
+        <a href="https://github.com/ready-oun" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+        @ready-oun  
+        </a>
+          <h3 class="mt-5 mb-3">신규 등록 상품</h3>
+          <form class="row row-cols-lg-auto g-3 align-items-center" onsubmit="return false;"> 
+  
+              <div class="col-12">
+                <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
+                <select class="form-select" id="inlineFormSelectPref">
+                  <!-- 카테고리 셀렉트 코드 -->
+                  <option selected>카테고리</option>
+                  <option value="1">상의</option>
+                  <option value="2">하의</option>
+                  <option value="3">신발</option>
+                  <option value="4">패션잡화</option>
+                </select>
+              </div>
+              <div class="col-3">
+                  <!-- input 입력창 코드-->
+                  <input
+                  type="text"
+                  class="form-control"
+                  placeholder="제품명을 입력해주세요."
+                  aria-label="input"
+                  aria-describedby="basic-addon1"
+                />
+              </div>
+              <div class="col-auto">
+                <!-- 조회버튼 코드 -->
+                <button class="btn btn-primary">조회</button>
+              </div>
+  
+          </form>
+            <div class="container mt-3">
+          <table class="table table-sm">
+            <nav class="d-grid gap-2 d-md-flex justify-content-md-end" aria-label="...">
+              <!-- 성별 구분 -->
+              <ul class="pagination pagination-sm" id="gender-filter">
+                <li class="page-item" aria-current="page" id="male">
+                  <span class="page-link">남성</span> <!-- js로 active > id 부여 -->
+                </li>
+                <li class="page-item"><a class="page-link" href="#" id="female">여성</a></li>
+                <li class="page-item"><a class="page-link" href="#" id="both">키즈</a></li>
+              </ul>
+            </nav>
+              <thead>
+                  <!-- 열의 속성값을 나타내는 코드(예 : 카테고리, 브랜드, 상품명, 가격) -->
+                  <tr>
+                      <!--전체 선택 체크박스-->
+                      <th scope="col" class="checkbox-header">
+                        <div class="form-check">
+                          <input class="checkbox-input" type="checkbox" id="selectAllCheckbox" onclick="selectAllCheckboxes()">
+                          <label class="checkbox-label" for="selectAllCheckbox"></label>
+                        </div>
+                      </th>
+                      <th scope="col">카테고리</th>
+                      <th scope="col">성별</th>
+                      <th scope="col">브랜드</th>
+                      <th scope="col">상품명</th>
+                      <th scope="col">가격</th>
+                    </tr>
+              </thead>
+              <tbody id="data-table">
+                  <!-- 추후 크롤링한 데이터가 들어가는 자리 -->
+              </tbody>
+          </table>
+      </div>
+      <!-- 페이지 네이션 코드 -->
+      <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+      </nav>
+     <script>
+        // 크롤링한 데이터를 아래와 같은 형태의 객체 배열로 가정합니다.
+        // 추후 데이터베이스에 있는 데이터를 쿼리문으로 불러 올 수 있게 쿼리르 작성해 볼 수 있음
+        const data = [
+            { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+            { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+            { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
+            { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
+            { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+            { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+            { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
+            { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' }, 
+            { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+            { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+            { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
+            { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
+            { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+            { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+            { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
+            { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },          
+            { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+            { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+            { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
+            { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
+            { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+            { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+            { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
+            { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' }         
+        ];
+        
+        const dataTable = document.getElementById('data-table');
+        
+        data.forEach((item) => {
+            const row = dataTable.insertRow();
+            row.insertCell(0).innerHTML = "<input type='checkbox'>" // add checkbox
+            row.insertCell(1).innerHTML = item.category;
+            row.insertCell(2).innerHTML = item.gender;
+            row.insertCell(3).innerHTML = item.brand;
+            row.insertCell(4).innerHTML = item.product;
+            row.insertCell(5).innerHTML = item.price;
+        });
+  
+        // 오늘 날짜 업데이트
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        const formattedDate = `${year}-${month}-${day}`;
+  
+        const header = document.querySelector('h3');
+        header.textContent = `신규 등록 상품 (${formattedDate})`;
+  
+        // 전체 선택
+        function selectAllCheckboxes() {
+          const checkboxes = document.querySelectorAll("input[type='checkbox']") //
+          const selectAllCheckbox = document.getElementById("selectAllCheckbox")
+  
+          checkboxes.forEach((checkbox) => {
+            checkbox.checked = selectAllCheckbox.checked;
+          })
+        }
+  
+        // 페이지 전환
+  
+        // 남성, 여성, 남/여 페이지네이션 active 구현  
+        const malePage = document.getElementById('male')
+        const femalePage = document.getElementById('female')
+        const bothPage = document.getElementById('both')
+  
+        malePage.addEventListener('click', ()=> {
+          if (malePage.classList.contains('active') !==true) {
+            malePage.classList.add('active')
+            femalePage.classList.remove('active')
+            bothPage.classList.remove('active')
+            let malePage = filterGender.filter((element)=>{
+              return element.gender == 'male'
+            })          
+          } else { // click 해제 > active 포함 안 하게 됨 > 전체 목록 표시
+            malePage.classList.remove('active')
+            return element.gender == undefined
+          }    
+        })
+        
+        femalePage.addEventListener('click', ()=> {
+          if (femalePage.classList.contains('active') !==true) {
+            malePage.classList.remove('active')
+            femalePage.classList.add('active')
+            bothPage.classList.remove('active')
+            // filterData('여성')
+          } else {
+            femalePage.classList.remove('active')
+            // filterData()
+          }
+          
+        })
+        bothPage.addEventListener('click', ()=> {
+          if (bothPage.classList.contains('active') !==true) {
+            malePage.classList.remove('active')
+            femalePage.classList.remove('active')
+            bothPage.classList.add('active')
+            // filterData('남/여')
+          } else {
+            bothPage.classList.remove('active')
+            // filterData()
+          }
+        })
+
+  
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </body>
+  </html>
