@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>loop</title>
+  </head>
+  <body>
+    <script>
+      /*
+      for(초기식; 조건식 ; 반복식){
+          조건이 true인 경우 반복 수행할 코드
+          *초기식: 반복 조건의 초기화 작업
+          *반복식: 반복이 한 번 끝날 때마다 실행될 작업
+      }
+      */
+
+      // while문을 이용하여 1부터 50까지의 숫자 중에서 홀수인 경우에만 현재 반복을 종료하고 다음 반복을 이어가며, 홀수의 총합을 구하는 코드를 작성해보세요.
+
+      let sum = 0;
+      let i = 1;
+      while (i <= 50) {
+        if (i % 2 !== 0) {
+          sum += i;
+          console.log(i);
+        }
+        i++;
+        // 왜 무한루프 된 거지? ? ?? ? ?
+        // i++;를 if 밖으로 안 빼고, else 안에서 돌려서 무한루프되는거였따.....
+      }
+      console.log(sum);
+    </script>
+  </body>
+</html>

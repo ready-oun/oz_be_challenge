@@ -1,0 +1,47 @@
+<!--
+    `name`, `value`, 그리고 `class`는 HTML 요소에서 다른 역할을 하는 속성들입니다.
+
+1. **`name` 속성:**
+   - `name` 속성은 주로 폼 요소에서 사용됩니다.
+   - 폼 요소가 서버로 데이터를 전송할 때, 폼 컨트롤의 이름을 식별하는 데 사용됩니다.
+   - 같은 폼 안에서 각 입력 요소에 고유한 이름을 부여하여 서버에서 어떤 데이터가 어디에 속하는지 식별합니다.
+
+    ```html
+    <form action="/submit" method="post">
+      <input type="text" name="username">
+      <input type="password" name="password">
+      <input type="submit" value="Submit">
+    </form>
+    ```
+
+2. **`value` 속성:**
+   - `value` 속성은 주로 폼 요소에서 사용되며, 해당 요소의 현재 값을 나타냅니다.
+   - 사용자가 입력한 텍스트, 체크된 상태의 체크박스, 선택된 옵션의 값 등을 나타냅니다.
+   - 자바스크립트에서 이 값을 읽어오거나 변경할 수 있습니다.
+
+    ```html
+    <input type="text" value="Default Text">
+    <input type="checkbox" value="checkValue">
+    <select>
+      <option value="option1">Option 1</option>
+      <option value="option2">Option 2</option>
+    </select>
+    ```
+
+3. **`class` 속성:**
+   - `class` 속성은 여러 요소에 동일한 스타일이나 동작을 적용할 때 사용됩니다.
+   - 스타일 시트(CSS)에서 클래스를 선택하여 스타일을 적용할 수 있습니다.
+   - 자바스크립트에서도 클래스를 활용하여 특정 동작을 수행하거나 요소를 선택할 수 있습니다.
+
+    ```html
+    <p class="important-text">This is an important paragraph.</p>
+    <div class="container">...</div>
+    ```
+
+따라서, `name`은 주로 서버로 데이터를 전송할 때 사용되는 식별자로, 
+`value`는 폼 요소의 현재 값으로, 
+`class`는 스타일이나 동작을 공유하는 그룹을 나타냅니다. 
+
+각각의 속성은 서로 다른 목적을 가지고 있으며, 
+어떤 상황에서 사용할지는 해당 기능의 필요성과 문맥에 따라 결정됩니다.
+-->

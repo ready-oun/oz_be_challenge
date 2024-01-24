@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Print 5 multiples of the number 4</title>
+  </head>
+  <body>
+    <script>
+      /* 100 ~ 500 , 4x w/ 5 cols
+      while ((i = 100)) {
+        i % 4 == 0;
+        i < 500;
+        print(i);
+      }*/
+
+      function result() {
+        let resultCon = document.createElement("div");
+        resultCon.classList.add("resultCon");
+        document.body.appendChild(resultCon);
+
+        // 컨테이너 div > 결과를 컨테이너에 넣어
+        let i = 100;
+        while (i <= 500) {
+          resultCon.textContent = i; // i가 아닌 result를 냅다 써서 오류
+          resultCon.appendChild(resultCon);
+          i += 4;
+        }
+      }
+
+      result();
+    </script>
+  </body>
+</html>

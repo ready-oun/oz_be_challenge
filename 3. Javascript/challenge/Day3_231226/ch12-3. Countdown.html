@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countdown</title>
+  </head>
+  <body>
+    <div id="countdown"></div>
+    <script>
+      function countDown() {
+        const now = new Date();
+        const end = new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0);
+        const rest = end - now;
+
+        const day = Math.floor(rest / (1000 * 60 * 60 * 24));
+        const hour = Math.floor(rest / (1000 * 60 * 60));
+        const min = Math.floor(rest / (1000 * 60));
+        const sec = Math.floor(rest / 1000);
+
+        const d = day;
+        const h = hour - day * 24;
+        const m = min - hour * 60;
+        const s = sec - min * 60;
+
+        document.getElementById(
+          "countdown"
+        ).innerHTML = `<h1>카운트다운 타이머</h1><p>현재 날짜와 시간: ${now}<p>
+            <p>올해의 남은 시간: ${d}일 ${h}시간 ${m}분 ${s}초 남았습니다. </p>`;
+      }
+      setInterval(countDown, 1000);
+      countDown();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>if else</title>
+  </head>
+  <body>
+    <h1></h1>
+    <p></p>
+
+    <script>
+      // 오늘의 오타 : documnet , propmt ..
+      const h1 = document.querySelector("h1");
+      const p = document.querySelector("p");
+
+      const isThere = confirm("wanna display the heading?");
+
+      if (isThere) {
+        h1.textContent = "How much is your fee on the bus?";
+      }
+
+      const age = parseInt(prompt("How old are you?"));
+
+      if (age >= 20) {
+        p.textContent = "it's 1 box.";
+      } else if (age >= 8) {
+        p.textContent = "It's a half box.";
+      } else {
+        p.textContent = "It's free!";
+      }
+    </script>
+  </body>
+</html>
