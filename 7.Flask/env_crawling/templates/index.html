@@ -20,17 +20,16 @@
         @ready-oun  
         </a>
           <h3 class="mt-5 mb-3">신규 등록 상품</h3>
-          <form class="row row-cols-lg-auto g-3 align-items-center" onsubmit="return false;"> 
-  
+          <form class="row row-cols-lg-auto g-3 align-items-center" method="GET"> 
               <div class="col-12">
                 <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
-                <select class="form-select" id="inlineFormSelectPref">
+                <select class="form-select" id="inlineFormSelectPref" name="category_name">
                   <!-- 카테고리 셀렉트 코드 -->
                   <option selected>카테고리</option>
-                  <option value="1">상의</option>
-                  <option value="2">하의</option>
-                  <option value="3">신발</option>
-                  <option value="4">패션잡화</option>
+                  <option value="상의">상의</option>
+                  <option value="하의">하의</option>
+                  <option value="신발">신발</option>
+                  <option value="패션잡화">패션잡화</option>
                 </select>
               </div>
               <div class="col-3">
@@ -78,8 +77,18 @@
                       <th scope="col">가격</th>
                     </tr>
               </thead>
-              <tbody id="data-table">
+              <tbody> 
                   <!-- 추후 크롤링한 데이터가 들어가는 자리 -->
+                  {%for num in range(kream_data_len)%}
+                  <tr>
+                    <td><input type="checkbox"></td>
+                    <td>{{kream_data[num]["category_name"]}}</td>
+                    <td>{{kream_data[num]["gender"]}}</td>
+                    <td>{{kream_data[num]["brand"]}}</td>
+                    <td>{{kream_data[num]["product_name"]}}</td>
+                    <td>{{kream_data[num]["price"]}}</td>
+                  </tr>
+                  {%endfor%}
               </tbody>
           </table>
       </div>
@@ -104,44 +113,44 @@
      <script>
         // 크롤링한 데이터를 아래와 같은 형태의 객체 배열로 가정합니다.
         // 추후 데이터베이스에 있는 데이터를 쿼리문으로 불러 올 수 있게 쿼리르 작성해 볼 수 있음
-        const data = [
-            { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
-            { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
-            { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
-            { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
-            { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
-            { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
-            { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
-            { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' }, 
-            { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
-            { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
-            { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
-            { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
-            { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
-            { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
-            { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
-            { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },          
-            { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
-            { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
-            { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
-            { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
-            { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
-            { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
-            { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
-            { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' }         
-        ];
+        // const data = [
+        //     { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+        //     { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+        //     { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
+        //     { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
+        //     { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+        //     { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+        //     { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
+        //     { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' }, 
+        //     { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+        //     { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+        //     { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
+        //     { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
+        //     { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+        //     { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+        //     { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
+        //     { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },          
+        //     { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+        //     { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+        //     { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
+        //     { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
+        //     { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
+        //     { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
+        //     { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
+        //     { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' }         
+        // ];
         
-        const dataTable = document.getElementById('data-table');
+        // const dataTable = document.getElementById('data-table');
         
-        data.forEach((item) => {
-            const row = dataTable.insertRow();
-            row.insertCell(0).innerHTML = "<input type='checkbox'>" // add checkbox
-            row.insertCell(1).innerHTML = item.category;
-            row.insertCell(2).innerHTML = item.gender;
-            row.insertCell(3).innerHTML = item.brand;
-            row.insertCell(4).innerHTML = item.product;
-            row.insertCell(5).innerHTML = item.price;
-        });
+        // data.forEach((item) => {
+        //     const row = dataTable.insertRow();
+        //     row.insertCell(0).innerHTML = "<input type='checkbox'>" // add checkbox
+        //     row.insertCell(1).innerHTML = item.category;
+        //     row.insertCell(2).innerHTML = item.gender;
+        //     row.insertCell(3).innerHTML = item.brand;
+        //     row.insertCell(4).innerHTML = item.product;
+        //     row.insertCell(5).innerHTML = item.price;
+        // });
   
         // 오늘 날짜 업데이트
         const today = new Date();
