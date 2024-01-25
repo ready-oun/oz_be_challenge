@@ -7,12 +7,12 @@ db = pymysql.connect (
 	host = '127.0.0.1',
     user = 'root',
     password = 'robin_robin',
-    db='kream',
+    db='KREAM',
     charset='utf8mb4'
 )
 
 cur = db.cursor()
-sql = "SELECT * FROM kream"
+sql = "SELECT * FROM product"
 cur.execute(sql)
 
 kream_data = cur.fetchall()
@@ -23,4 +23,4 @@ def index():
 
 if __name__ == '__main__':
 	app.debug = True
-	app.run
+	app.run()
