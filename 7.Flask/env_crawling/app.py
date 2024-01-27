@@ -17,8 +17,10 @@ cur = db.cursor()
 @app.route('/', methods=('GET',))
 def index():    
     category = request.args.get('category_name')
+    search_q = request.args.get('q')
     if category:
         sql = f"SELECT * FROM product WHERE category_name = '{category}'"
+        # AND product_name LIKE '%search_term%' LIMIT 20 OFFSET 0
     else:
         sql= f"SELECT * FROM product"
     cur.execute(sql)
@@ -29,6 +31,9 @@ def index():
     
     return render_template('index.html', kream_data = kream_data, kream_data_len=kream_data_len)
 # (1) 검색어, (2) 페이지네이션 !!!! 
+
+# def search_result(search_words):
+
 if __name__ == '__main__':
 	app.debug = True
 	app.run()

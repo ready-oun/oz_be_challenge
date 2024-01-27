@@ -7,6 +7,18 @@
         .form-check {
           padding-left: 0;
           padding-right: 1.5em
+
+        }
+
+        .category-col {
+          width: 100px;
+        }
+/* 
+        .table.table-sm th {
+          height: 1rem;
+        } */
+        .product_name {
+          font-size: 5px;
         }
       </style>
   </head>
@@ -26,10 +38,17 @@
                 <select class="form-select" id="inlineFormSelectPref" name="category_name">
                   <!-- 카테고리 셀렉트 코드 -->
                   <option selected>카테고리</option>
-                  <option value="상의">상의</option>
-                  <option value="하의">하의</option>
+                  <option value="아우터">아우터</option>
                   <option value="신발">신발</option>
+                  <option value="상의">하의</option>
+                  <option value="지갑">지갑</option>
+                  <option value="시계">시계</option>
                   <option value="패션잡화">패션잡화</option>
+                  <option value="컬렉터블">컬렉터블</option>
+                  <option value="뷰티">뷰티</option>
+                  <option value="테크">테크</option>
+                  <option value="캠핑">캠핑</option>
+                  <option value="가구/리빙">가구/리빙</option>
                 </select>
               </div>
               <div class="col-3">
@@ -40,14 +59,16 @@
                   placeholder="제품명을 입력해주세요."
                   aria-label="input"
                   aria-describedby="basic-addon1"
+                  name="q"
                 />
               </div>
               <div class="col-auto">
                 <!-- 조회버튼 코드 -->
                 <button class="btn btn-primary">조회</button>
               </div>
-  
-          </form>
+          
+            </form>
+
             <div class="container mt-3">
           <table class="table table-sm">
             <nav class="d-grid gap-2 d-md-flex justify-content-md-end" aria-label="...">
@@ -70,7 +91,7 @@
                           <label class="checkbox-label" for="selectAllCheckbox"></label>
                         </div>
                       </th>
-                      <th scope="col">카테고리</th>
+                      <th scope="col" class="category-col">카테고리</th>
                       <th scope="col">성별</th>
                       <th scope="col">브랜드</th>
                       <th scope="col">상품명</th>
@@ -85,7 +106,7 @@
                     <td>{{kream_data[num]["category_name"]}}</td>
                     <td>{{kream_data[num]["gender"]}}</td>
                     <td>{{kream_data[num]["brand"]}}</td>
-                    <td>{{kream_data[num]["product_name"]}}</td>
+                    <td class="product_name">{{kream_data[num]["product_name"]}}</td>
                     <td>{{kream_data[num]["price"]}}</td>
                   </tr>
                   {%endfor%}
@@ -111,47 +132,6 @@
           </ul>
       </nav>
      <script>
-        // 크롤링한 데이터를 아래와 같은 형태의 객체 배열로 가정합니다.
-        // 추후 데이터베이스에 있는 데이터를 쿼리문으로 불러 올 수 있게 쿼리르 작성해 볼 수 있음
-        // const data = [
-        //     { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
-        //     { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
-        //     { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
-        //     { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
-        //     { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
-        //     { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
-        //     { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
-        //     { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' }, 
-        //     { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
-        //     { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
-        //     { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
-        //     { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
-        //     { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
-        //     { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
-        //     { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
-        //     { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },          
-        //     { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
-        //     { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
-        //     { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
-        //     { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' },
-        //     { category: "상의", gender: "여성", brand: 'Supreme', product: '슈프림 박스로고 후드티', price: '390,000' },
-        //     { category: "하의", gender: "남성", brand: 'DIESEL', product: '디젤 트랙 팬츠', price: '188,000' },
-        //     { category: "신발", gender: "남/여", brand: 'Nike', product: '에어포스 1', price: '137,000' },
-        //     { category: "패션잡화", gender: "남/여", brand: 'Music&Goods', product: '빵빵이 키링', price: '29,000' }         
-        // ];
-        
-        // const dataTable = document.getElementById('data-table');
-        
-        // data.forEach((item) => {
-        //     const row = dataTable.insertRow();
-        //     row.insertCell(0).innerHTML = "<input type='checkbox'>" // add checkbox
-        //     row.insertCell(1).innerHTML = item.category;
-        //     row.insertCell(2).innerHTML = item.gender;
-        //     row.insertCell(3).innerHTML = item.brand;
-        //     row.insertCell(4).innerHTML = item.product;
-        //     row.insertCell(5).innerHTML = item.price;
-        // });
-  
         // 오늘 날짜 업데이트
         const today = new Date();
         const year = today.getFullYear();
